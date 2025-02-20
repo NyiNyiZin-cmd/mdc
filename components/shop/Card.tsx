@@ -11,7 +11,10 @@ const Card = ({ id, name }: CardProps) => {
   return (
     <View style={styles.card}>
       {/* <Text style={styles.text}>{name}</Text> */}
-      <Image source={require("@/assets/images/react-logo.png")} />
+      <Image
+        source={require("@/assets/images/react-logo.png")}
+        style={styles.image}
+      />
     </View>
   );
 };
@@ -32,5 +35,9 @@ const styles = StyleSheet.create({
     color: "#fff",
     fontWeight: "bold",
     textTransform: "capitalize",
+  },
+  image: {
+    width: "100%",
+    height: "100%",
   },
 });
