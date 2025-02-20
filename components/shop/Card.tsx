@@ -1,5 +1,6 @@
-import { StyleSheet, Text, View, Dimensions, Image } from "react-native";
-import React from "react";
+import { StyleSheet, Pressable, View, Dimensions } from "react-native";
+import { Image } from "expo-image";
+import React, { useState } from "react";
 
 type CardProps = {
   id: number;
@@ -7,15 +8,26 @@ type CardProps = {
 };
 const { width, height } = Dimensions.get("screen");
 
+const blurhash =
+  "|rF?hV%2WCj[ayj[a|j[az_NaeWBj@ayfRayfQfQM{M|azj[azf6fQfQfQIpWXofj[ayj[j[fQayWCoeoeaya}j[ayfQa{oLj?j[WVj[ayayj[fQoff7azayj[ayj[j[ayofayayayj[fQj[ayayj[ayfjj[j[ayjuayj[";
+
 const Card = ({ id, name }: CardProps) => {
+  const [isCLick, setIsCLick] = useState(false);
+
   return (
-    <View style={styles.card}>
+    <Pressable
+      style={[styles.card, isCLick && { backgroundColor: "#0a7ea4" }]}
+      onPress={() => setIsCLick(!isCLick)}
+    >
       {/* <Text style={styles.text}>{name}</Text> */}
       <Image
-        source={require("@/assets/images/react-logo.png")}
         style={styles.image}
+        source={{ uri: "http://localhost:4000/teen.png" }}
+        placeholder={{ blurhash }}
+        contentFit="cover"
+        transition={1000}
       />
-    </View>
+    </Pressable>
   );
 };
 
