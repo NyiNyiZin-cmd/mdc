@@ -2,16 +2,19 @@ import { StyleSheet, Pressable, View, Dimensions } from "react-native";
 import { Image } from "expo-image";
 import React, { useState } from "react";
 
+import { API_URL } from "@/config";
+
 type CardProps = {
   id: number;
   name: string;
+  image: string;
 };
 const { width, height } = Dimensions.get("screen");
 
 const blurhash =
   "|rF?hV%2WCj[ayj[a|j[az_NaeWBj@ayfRayfQfQM{M|azj[azf6fQfQfQIpWXofj[ayj[j[fQayWCoeoeaya}j[ayfQa{oLj?j[WVj[ayayj[fQoff7azayj[ayj[j[ayofayayayj[fQj[ayayj[ayfjj[j[ayjuayj[";
 
-const Card = ({ id, name }: CardProps) => {
+const Card = ({ id, name, image }: CardProps) => {
   const [isCLick, setIsCLick] = useState(false);
 
   return (
@@ -22,7 +25,7 @@ const Card = ({ id, name }: CardProps) => {
       {/* <Text style={styles.text}>{name}</Text> */}
       <Image
         style={styles.image}
-        source={{ uri: "http://localhost:4000/teen.png" }}
+        source={{ uri: API_URL + image }}
         placeholder={{ blurhash }}
         contentFit="cover"
         transition={1000}
