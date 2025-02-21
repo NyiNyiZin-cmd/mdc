@@ -1,22 +1,10 @@
 import { StyleSheet, FlatList, ActivityIndicator, Text } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
+import { useFocusEffect } from "expo-router";
 
 import Card from "@/components/shop/Card";
 import { API_URL } from "@/config";
-
-// const users = [
-//   { id: 1, name: "ko ko" },
-//   { id: 2, name: "mg mg" },
-//   { id: 3, name: "soe soe" },
-//   { id: 4, name: "ni ni" },
-//   { id: 5, name: "mu mu" },
-//   { id: 6, name: "bo bo" },
-//   { id: 7, name: "pu pu" },
-//   { id: 8, name: "hla hla" },
-//   { id: 9, name: "ma ma" },
-//   { id: 10, name: "nyi nyi" },
-// ];
 
 type UserProps = {
   id: number;
@@ -28,11 +16,18 @@ export default function HomeScreen() {
   const [users, setUsers] = useState<UserProps[]>([]);
   const [loading, setLoading] = useState(false);
 
-  useEffect(() => {
-    fetchUsers();
-  }, []);
+  // useEffect(() => {
+  //   fetchUsers();
+  // }, []);
+
+  useFocusEffect(
+    useCallback(() => {
+      fetchUsers();
+    }, [])
+  );
 
   const fetchUsers = async () => {
+    console.log("fetching users");
     setLoading(true);
     try {
       const response = await fetch(API_URL + "users");
